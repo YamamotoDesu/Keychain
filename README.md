@@ -104,3 +104,23 @@ let data = KeychainHelper.standard.read(service: "access-token", account: "faceb
 let accessToken = String(data: data, encoding: .utf8)!
 print(accessToken)
 ```
+
+4. Add a deleting function 
+```swift
+func delete(service: String, account: String) {
+    
+    let query = [
+        kSecAttrService: service,
+        kSecAttrAccount: account,
+        kSecClass: kSecClassGenericPassword,
+        ] as CFDictionary
+    
+    // Delete item from keychain
+    SecItemDelete(query)
+}
+```
+
+### Call a deleting function 
+```swift
+KeychainHelper.standard.delete(service: "access-token", account: "yamamoto")
+```
