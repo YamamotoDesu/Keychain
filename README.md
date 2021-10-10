@@ -51,7 +51,7 @@ kSecClass:
 kSecAttrService and kSecAttrAccount: 
 > These 2 keys are mandatory when kSecClass is set to kSecClassGenericPassword. The values for both of these keys will act as the primary key for the data being saved. In other words, we will use them to retrieve the saved data from the keychain later on.
 
-### Call a save function 
+### Call a saving function 
 ```swift 
 let accessToken = "dummy-access-token"
 let data = Data(accessToken.utf8)
@@ -77,5 +77,23 @@ func save(_ data: Data, service: String, account: String) {
         // Update existing item
         SecItemUpdate(query, attributesToUpdate)
     }
+}
+```
+
+## 3. Add a reading function 
+```swift 
+func read(service: String, account: String) -> Data? {
+    
+    let query = [
+        kSecAttrService: service,
+        kSecAttrAccount: account,
+        kSecClass: kSecClassGenericPassword,
+        kSecReturnData: true
+    ] as CFDictionary
+    
+    var result: AnyObject?
+    SecItemCopyMatching(query, &result)
+    
+    return (result as? Data)
 }
 ```
