@@ -50,3 +50,32 @@ kSecClass:
 
 kSecAttrService and kSecAttrAccount: 
 > These 2 keys are mandatory when kSecClass is set to kSecClassGenericPassword. The values for both of these keys will act as the primary key for the data being saved. In other words, we will use them to retrieve the saved data from the keychain later on.
+
+### Call a save function 
+```swift 
+let accessToken = "dummy-access-token"
+let data = Data(accessToken.utf8)
+KeychainHelper.standard.save(data, service: "access-token", account: "facebook")
+```
+
+## Updating Existing Data in Keychain 
+```swift 
+func save(_ data: Data, service: String, account: String) {
+
+    // ... ...
+    // ... ...
+    if status == errSecDuplicateItem {
+        // Item already exist, thus update it.
+        let query = [
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecClass: kSecClassGenericPassword,
+        ] as CFDictionary
+
+        let attributesToUpdate = [kSecValueData: data] as CFDictionary
+
+        // Update existing item
+        SecItemUpdate(query, attributesToUpdate)
+    }
+}
+```
