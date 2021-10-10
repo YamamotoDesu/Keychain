@@ -122,5 +122,5 @@ func delete(service: String, account: String) {
 
 ### Call a deleting function 
 ```swift
-KeychainHelper.standard.delete(service: "access-token", account: "yamamoto")
+KeychainHelper.standard.delete(service: "access-token", account: "facebook")
 ```
