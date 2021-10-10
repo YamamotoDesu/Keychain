@@ -33,3 +33,11 @@ func save(_ data: Data, service: String, account: String) {
     }
 }
 ```
+kSecValueData:
+> A key that represents the data being saved to the keychain.
+
+kSecClass: 
+> A key that represents the type of data being saved. Here we set its value as kSecClassGenericPassword indicating that the data we are saving is a generic password item.
+
+kSecAttrService and kSecAttrAccount: 
+> These 2 keys are mandatory when kSecClass is set to kSecClassGenericPassword. The values for both of these keys will act as the primary key for the data being saved. In other words, we will use them to retrieve the saved data from the keychain later on.
