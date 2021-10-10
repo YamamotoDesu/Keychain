@@ -1,6 +1,7 @@
 # How to Persist Sensitive Data Using Keychain in Swift
 ## 1. Creat a helper class 
-```swfit
+
+```swift
 final class KeychainHelper {
     
     static let standard = KeychainHelper()
@@ -11,7 +12,8 @@ final class KeychainHelper {
 ```
 
 ## 2. Add a save function in the class
-```swfit
+
+```swift
 func save(_ data: Data, service: String, account: String) {
     
     // Create query
