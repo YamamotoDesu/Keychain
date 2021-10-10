@@ -97,3 +97,10 @@ func read(service: String, account: String) -> Data? {
     return (result as? Data)
 }
 ```
+
+### Call a reading function 
+```swift
+let data = KeychainHelper.standard.read(service: "access-token", account: "facebook")!
+let accessToken = String(data: data, encoding: .utf8)!
+print(accessToken)
+```
